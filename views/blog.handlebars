@@ -1,14 +1,41 @@
-<div class="text-center">
-  <h2>{{title}}</h2>
-  <p>{{{get_emoji}}}</p>
-  <p>{{content}}</p>
-  <p>Created by {{user.name}} on {{format_date date_created}}</p>
-  {{!-- <p>
-    <span for="img" aria-label="money">💲</span>
-    <span class="dollar-amount">{{format_amount needed_funding}}</span>
-    needed
-  </p> --}}
-  <p>
-    <button class="btn btn-primary">Comment</button>
-  </p>
+<div class="card">
+  <div class="card-header">
+    {{title}}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{content}}</p>
+      <footer class="blockquote-footer">Created by {{user.name}} on {{format_date date_created}}</footer>
+    </blockquote>
+  </div>
 </div>
+
+ {{#each comments as |comment| }}
+<div class="card">
+  <div class="card-header">
+    Comment
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{comment.comment}}</p>
+      <footer class="blockquote-footer">Created by {{comment.user.name}} on {{format_date comment.date_created}}</footer>
+    </blockquote>
+  </div>
+</div>
+
+  {{/each}}
+<div class="card">
+  <div class="card-header">
+    {{!-- <label for="comment">Comments</label> --}}
+    <form class="form new-comment-form">
+      <div class="form-floating">
+
+        <textarea class="form-control" placeholder="Leave a comment here" id="comment"
+          style="height: 100px; min-width: 100%"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script src="../js/blog.js"></script>
